@@ -34,7 +34,7 @@ jobs:
         working-directory: api/marketplace
 
       - name: Show repository
-        run: echo "Validating repository at ${GITHUB_WORKSPACE}
+        run: echo "Validating repository at ${GITHUB_WORKSPACE}"
 
       - name: Validate Red Hat Data
         env:
