@@ -1,6 +1,6 @@
 # Validate the repository against the Adoptium marketplace schema
 
-name: Validate marketplace data
+name: Validate for Adoptium Marketplace
 
 on:
   pull_request:
@@ -8,10 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  update:
+  validate:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
 
@@ -34,10 +33,13 @@ jobs:
         run: ../mvnw -DskipTests --batch-mode clean install
         working-directory: api/marketplace
 
-      - name: Validate data
+      - name: Show repository
+        run: echo "Validating repository at ${GITHUB_WORKSPACE}
+
+      - name: Validate Red Hat Data
         env:
           ALLOW_FILE_BASED_URL: true
-          REPO_URL: file:///home/runner/work/marketplace/
+          REPO_URL: file://${GITHUB_WORKSPACE}
           REPO_KEY: |
             -----BEGIN PUBLIC KEY-----
             MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoWlAyGsyYfaE42vvMjr0
